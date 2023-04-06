@@ -22,12 +22,24 @@ var ball = {
 }
 
 function setup(){
-  var canvas =  createCanvas(700,600);
+  canvas = createCanvas(700, 600);
+canvas.parent('canvas'); //The Parent Function says the place and location of the canvas.//
+video = createCapture(VIDEO);
+video.size(700, 600);
+video.hide();
+
+
+poseNet = ml5.poseNet(video, modelloaded);
+
+poseNet.on('pose', gotPoses);
+
+
 }
 
 
 function draw(){
 
+  image(video, 0, 0, 700, 600);
  background(0); 
 
  fill("black");
@@ -163,3 +175,11 @@ function paddleInCanvas(){
     mouseY =0;
   }  
 }
+
+
+
+function modelloaded(){
+
+  console.log('The Model is Loaded on the Canvas!!!!');
+}
+
